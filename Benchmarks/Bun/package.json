@@ -1,0 +1,12 @@
+{
+  "name": "fluentkit-bun-comparison",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "benchmark": "bun --expose-gc benchmark.ts"
+  },
+  "dependencies": {
+    "drizzle-orm": "^1.0.0-rc.4",
+    "mitata": "^1.0.34"
+  }
+}

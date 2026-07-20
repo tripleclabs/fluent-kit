@@ -47,3 +47,7 @@ Allocation metrics include work performed by the asynchronous PostgreSQL client
 and should be interpreted most carefully for the in-memory hydration benchmarks.
 Keep the machine otherwise idle and compare results from the same Swift compiler,
 build environment, and PostgreSQL configuration.
+
+For a cross-runtime frame of reference, `Bun/` contains matching Bun SQL and
+Drizzle benchmarks. See [the Bun comparison](Bun/README.md) for methodology,
+commands, and the initial results.
