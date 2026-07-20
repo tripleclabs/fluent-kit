@@ -4,8 +4,8 @@ Packages
 *.xcodeproj
 Package.pins
 Package.resolved
+!Benchmarks/Package.resolved
 DerivedData/
 .swiftpm
 Tests/LinuxMain.swift
 .vscode
-
