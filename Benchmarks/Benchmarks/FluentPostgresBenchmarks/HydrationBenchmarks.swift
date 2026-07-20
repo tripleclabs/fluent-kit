@@ -89,6 +89,16 @@ func registerHydrationBenchmarks() {
         }
     }
 
+    Benchmark("Hydration/DirectNarrowModel", configuration: hydrationConfiguration) { benchmark in
+        do {
+            let model = DirectNarrowModel()
+            try model.output(from: narrowOutput)
+            blackHole(model)
+        } catch {
+            benchmark.error("Direct narrow model hydration failed: \(String(reflecting: error))")
+        }
+    }
+
     Benchmark("Hydration/WideModel", configuration: hydrationConfiguration) { benchmark in
         do {
             let model = WideModel()
@@ -96,6 +106,16 @@ func registerHydrationBenchmarks() {
             blackHole(model)
         } catch {
             benchmark.error("Wide model hydration failed: \(String(reflecting: error))")
+        }
+    }
+
+    Benchmark("Hydration/DirectWideModel", configuration: hydrationConfiguration) { benchmark in
+        do {
+            let model = DirectWideModel()
+            try model.output(from: wideOutput)
+            blackHole(model)
+        } catch {
+            benchmark.error("Direct wide model hydration failed: \(String(reflecting: error))")
         }
     }
 }

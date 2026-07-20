@@ -69,12 +69,28 @@ func registerPostgresQueryBenchmarks() {
             blackHole(models)
         }
 
+        postgresBenchmark("Postgres/Direct/Narrow/\(rowCount)-rows") { _, context in
+            let models = try await DirectNarrowModel.query(on: context.database)
+                .sort(\.$id)
+                .limit(rowCount)
+                .all()
+            blackHole(models)
+        }
+
         postgresBenchmark("Postgres/Raw/Wide/\(rowCount)-rows") { _, context in
             blackHole(try await rawWideRows(rowCount, using: context))
         }
 
         postgresBenchmark("Postgres/Fluent/Wide/\(rowCount)-rows") { _, context in
             let models = try await WideModel.query(on: context.database)
+                .sort(\.$id)
+                .limit(rowCount)
+                .all()
+            blackHole(models)
+        }
+
+        postgresBenchmark("Postgres/Direct/Wide/\(rowCount)-rows") { _, context in
+            let models = try await DirectWideModel.query(on: context.database)
                 .sort(\.$id)
                 .limit(rowCount)
                 .all()

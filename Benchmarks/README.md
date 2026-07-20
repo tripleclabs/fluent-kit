@@ -4,6 +4,11 @@ This standalone package measures FluentKit's in-memory model hydration and its
 PostgreSQL query paths. It is separate from the root package to avoid making a
 database driver or benchmark framework a production dependency of FluentKit.
 
+The `Direct` model variants contain hand-written versions of the property access
+code that a future macro could generate. They map to the same PostgreSQL tables
+as the ordinary reflective models, providing an otherwise like-for-like measure
+of removing reflection from database input and output.
+
 The PostgreSQL benchmarks create and remove only the dedicated
 `fluentkit_benchmark` schema. Set the connection URL explicitly; credentials are
 never stored in this repository:
@@ -20,6 +25,9 @@ Useful commands include:
 ```console
 # Run only the in-memory hydration benchmarks.
 swift package benchmark --target FluentPostgresBenchmarks --filter 'Hydration/.*'
+
+# Compare reflective and generated-style PostgreSQL hydration paths.
+swift package --disable-sandbox benchmark --target FluentPostgresBenchmarks --filter 'Postgres/(Fluent|Direct)/.*'
 
 # Record and compare a local baseline.
 swift package --disable-sandbox benchmark baseline update --baseline main
